@@ -89,6 +89,61 @@ router.post('/login', async (req, res) => {
 });
 
 
+// Google OAuth endpoint
+router.post('/google', async (req, res) => {
+  try {
+    const { uid, email, displayName, photoURL } = req.body;
+    
+    if (!uid || !email) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+    
+    // Check if user exists
+    let user = await User.findOne({ $or: [{ email }, { firebaseUid: uid }] });
+    
+    if (user) {
+      // Update user with Google info if not already set
+      if (!user.firebaseUid) {
+        user.firebaseUid = uid;
+        user.photoURL = photoURL;
+        await user.save();
+      }
+    } else {
+      // Create new user
+      user = new User({
+        username: displayName || email.split('@')[0],
+        email,
+        firebaseUid: uid,
+        photoURL,
+        isGoogleUser: true
+      });
+      await user.save();
+    }
+    
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user._id, role: user.role, username: user.username }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '7d' }
+    );
+    
+    res.json({ 
+      token, 
+      user: { 
+        id: user._id, 
+        username: user.username, 
+        email: user.email, 
+        role: user.role,
+        photoURL: user.photoURL,
+        isGoogleUser: user.isGoogleUser
+      } 
+    });
+  } catch (err) {
+    console.error('Google auth error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
 router.get('/me', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
