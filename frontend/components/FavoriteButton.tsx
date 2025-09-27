@@ -23,7 +23,7 @@ export default function FavoriteButton({ offerId, className = "", onToggle }: Fa
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await fetch(`http://localhost:5000/api/coupons/${offerId}/favorite-status`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}/favorite-status`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -48,7 +48,7 @@ export default function FavoriteButton({ offerId, className = "", onToggle }: Fa
       }
 
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/coupons/${offerId}/favorite`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}/favorite`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

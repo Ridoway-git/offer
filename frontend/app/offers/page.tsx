@@ -94,7 +94,7 @@ function OffersContent() {
 
   const fetchOffers = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/coupons');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons`);
       if (response.ok) {
         const data = await response.json();
         console.log('First offer data:', data.coupons?.[0]); // Debug first offer

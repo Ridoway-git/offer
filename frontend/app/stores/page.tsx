@@ -44,7 +44,7 @@ export default function StoresPage() {
   const fetchStores = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/stores');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores`);
       if (response.ok) {
         const data = await response.json();
         setStores(data.stores || []);

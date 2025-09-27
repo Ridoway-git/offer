@@ -167,7 +167,7 @@ export default function AdminPanel() {
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/auth/me', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/auth/me`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -204,7 +204,7 @@ export default function AdminPanel() {
       const headers = { 'Authorization': `Bearer ${token}` };
       
       // Load analytics
-      const analyticsRes = await fetch('http://localhost:5000/api/admin/analytics', { headers });
+      const analyticsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/admin/analytics`, { headers });
       if (analyticsRes.ok) {
         const analyticsData = await analyticsRes.json();
         setAnalytics(analyticsData);
@@ -228,7 +228,7 @@ export default function AdminPanel() {
       }
 
       // Load users
-      const usersRes = await fetch('http://localhost:5000/api/admin/users', { headers });
+      const usersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/admin/users`, { headers });
       if (usersRes.ok) {
         const usersData = await usersRes.json();
         setUsers(usersData.users || []);
@@ -238,7 +238,7 @@ export default function AdminPanel() {
       }
 
       // Load offers
-      const offersRes = await fetch(`http://localhost:5000/api/admin/coupons?t=${Date.now()}`, { headers });
+      const offersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/admin/coupons?t=${Date.now()}`, { headers });
       if (offersRes.ok) {
         const offersData = await offersRes.json();
         setOffers(offersData.coupons || []);
@@ -248,7 +248,7 @@ export default function AdminPanel() {
       }
 
       // Load stores (admin endpoint to get all stores including inactive)
-      const storesRes = await fetch('http://localhost:5000/api/admin/stores', { headers });
+      const storesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/admin/stores`, { headers });
       if (storesRes.ok) {
         const storesData = await storesRes.json();
         setStores(storesData.stores || []);
@@ -340,7 +340,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:5000/api/coupons', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -395,7 +395,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/coupons/${selectedOffer._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${selectedOffer._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -448,7 +448,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/coupons/${offerId}/toggle`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}/toggle`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -469,7 +469,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/coupons/${offerId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -518,7 +518,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:5000/api/stores', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -565,7 +565,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/stores/${selectedStore._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores/${selectedStore._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -610,7 +610,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/stores/${storeId}/toggle`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores/${storeId}/toggle`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -631,7 +631,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/stores/${storeId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores/${storeId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -676,7 +676,7 @@ export default function AdminPanel() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${selectedUser._id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/admin/users/${selectedUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -717,7 +717,7 @@ export default function AdminPanel() {
     }
     
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

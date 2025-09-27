@@ -86,7 +86,7 @@ export default function ExpiringOffersMarquee() {
   const fetchExpiringOffers = async () => {
     try {
       console.log('Fetching expiring offers...');
-      const response = await fetch('http://localhost:5000/api/coupons');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons`);
       if (response.ok) {
         const data = await response.json();
         const offers = data.coupons || [];

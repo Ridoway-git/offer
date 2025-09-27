@@ -35,7 +35,7 @@ export default function AuthModals({
   useEffect(() => {
     const checkBackend = async () => {
       try {
-        const res = await fetch('http://localhost:5000/health');
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/health`);
         if (res.ok) {
           setBackendStatus('online');
         } else {
@@ -59,7 +59,7 @@ export default function AuthModals({
     setError("");
     try {
       console.log("Attempting login with data:", loginData);
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
@@ -106,7 +106,7 @@ export default function AuthModals({
         password: signupData.password,
       };
       console.log("Attempting signup with data:", signupPayload);
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupPayload),

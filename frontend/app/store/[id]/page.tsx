@@ -101,7 +101,7 @@ export default function StorePage() {
       setLoading(true);
       
       // Fetch store details
-      const storeRes = await fetch(`http://localhost:5000/api/stores/${storeId}`);
+      const storeRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores/${storeId}`);
       if (storeRes.ok) {
         const storeData = await storeRes.json();
         setStore(storeData.store);
@@ -111,7 +111,7 @@ export default function StorePage() {
       }
 
       // Fetch store offers
-      const offersRes = await fetch(`http://localhost:5000/api/stores/${storeId}/coupons`);
+      const offersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/stores/${storeId}/coupons`);
       if (offersRes.ok) {
         const offersData = await offersRes.json();
         setOffers(offersData.coupons || []);
@@ -152,7 +152,7 @@ export default function StorePage() {
 
       // Track offer usage
       try {
-        await fetch(`http://localhost:5000/api/coupons/${offerId}/use`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}/use`, {
           method: 'POST'
         });
       } catch (error) {

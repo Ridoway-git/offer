@@ -36,7 +36,7 @@ export default function ProfilePage() {
     }
     setLoading(true);
     setError("");
-    fetch("http://localhost:5000/api/auth/me", {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(async (res) => {

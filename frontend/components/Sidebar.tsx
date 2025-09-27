@@ -38,7 +38,7 @@ export default function Sidebar({ selectedCategory, onCategoryChange }: SidebarP
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/coupons/categories');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/categories`);
       if (response.ok) {
         const data = await response.json();
         setCategories(data.categories || []);

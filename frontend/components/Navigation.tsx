@@ -26,7 +26,7 @@ export default function Navigation() {
     if (token) {
       setIsLoggedIn(true);
       // Fetch user data
-      fetch("http://localhost:5000/api/auth/me", {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -93,7 +93,7 @@ export default function Navigation() {
     setIsSearching(true);
     try {
       console.log('Searching for:', query);
-      const response = await fetch(`http://localhost:5000/api/coupons/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/search?q=${encodeURIComponent(query)}`);
       console.log('Search response status:', response.status);
       
       if (response.ok) {
@@ -104,7 +104,7 @@ export default function Navigation() {
       } else {
         console.log('Search endpoint failed, falling back to client-side filtering');
         // Fall back to filtering all coupons
-        const allResponse = await fetch('http://localhost:5000/api/coupons?limit=50');
+        const allResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons?limit=50`);
         if (allResponse.ok) {
           const allData = await allResponse.json();
           const filtered = (allData.coupons || []).filter((coupon: any) =>

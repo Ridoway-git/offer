@@ -79,7 +79,7 @@ export default function FavoritesPage() {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/coupons/favorites', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/favorites`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -103,7 +103,7 @@ export default function FavoritesPage() {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await fetch(`http://localhost:5000/api/coupons/${offerId}/favorite`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}/favorite`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

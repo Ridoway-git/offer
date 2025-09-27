@@ -90,14 +90,14 @@ export default function OfferSection({ selectedCategory, selectedStore, onStoreS
       const queryParams = `${categoryParam}${storeParam}`;
       
       // Fetch featured offers
-      const featuredRes = await fetch(`http://localhost:5000/api/coupons/featured?limit=12${queryParams}`);
+      const featuredRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/featured?limit=12${queryParams}`);
       if (featuredRes.ok) {
         const featuredData = await featuredRes.json();
         setFeaturedOffers(featuredData.coupons || []);
       }
 
       // Fetch all offers
-      const allRes = await fetch(`http://localhost:5000/api/coupons?limit=50${queryParams}`);
+      const allRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons?limit=50${queryParams}`);
       if (allRes.ok) {
         const allData = await allRes.json();
         setAllOffers(allData.coupons || []);
@@ -138,7 +138,7 @@ export default function OfferSection({ selectedCategory, selectedStore, onStoreS
 
       // Track offer usage
       try {
-        await fetch(`http://localhost:5000/api/coupons/${offerId}/use`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com'}/api/coupons/${offerId}/use`, {
           method: 'POST'
         });
       } catch (error) {

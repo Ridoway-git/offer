@@ -52,10 +52,21 @@ setInterval(() => {
   expireCoupons().catch(err => console.error('Error expiring coupons:', err));
 }, 1000 * 60 * 60); // every hour
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log('MongoDB connected'))
-.catch((err) => console.error('MongoDB connection error:', err));
+// Connect to MongoDB with timeout settings
+const mongooseOptions = {
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 30000,
+  serverSelectionTimeoutMS: 30000,
+  bufferCommands: false,
+  bufferMaxEntries: 0
+};
+
+mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
+.then(() => console.log('MongoDB connected successfully'))
+.catch((err) => {
+  console.error('MongoDB connection error:', err);
+  process.exit(1);
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
