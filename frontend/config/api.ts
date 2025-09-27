@@ -1,5 +1,5 @@
-// API Configuration - NUCLEAR CACHE BUST
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com';
+// API Configuration - Force Render backend
+export const API_BASE_URL = 'https://coupon-backend-amr1.onrender.com';
 
 // API Endpoints
 export const API_ENDPOINTS = {
