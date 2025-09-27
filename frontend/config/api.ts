@@ -1,4 +1,4 @@
-// API Configuration
+// API Configuration - Updated for Render deployment
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://coupon-backend-amr1.onrender.com';
 
 // API Endpoints
