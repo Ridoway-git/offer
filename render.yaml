@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: coupon-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        value: my-super-secret-jwt-key-123456
+      - key: CORS_ORIGIN
+        value: https://frontend-omega-one-81.vercel.app
+    healthCheckPath: /health
