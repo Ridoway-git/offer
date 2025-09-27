@@ -42,6 +42,14 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Simple test endpoint
+app.get('/test', (req, res) => {
+  res.status(200).json({ 
+    message: 'Test endpoint working',
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/admin', adminRoutes);
