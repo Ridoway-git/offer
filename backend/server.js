@@ -57,8 +57,7 @@ const mongooseOptions = {
   connectTimeoutMS: 30000,
   socketTimeoutMS: 30000,
   serverSelectionTimeoutMS: 30000,
-  bufferCommands: false,
-  bufferMaxEntries: 0
+  bufferCommands: false
 };
 
 mongoose.connect(process.env.MONGODB_URI, mongooseOptions)
