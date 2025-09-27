@@ -17,6 +17,22 @@ const adminRoutes = require('./routes/admin');
 const storeRoutes = require('./routes/stores');
 const expireCoupons = require('./utils/expireCoupons');
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    message: 'Coupon App API Server',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      coupons: '/api/coupons',
+      stores: '/api/stores',
+      admin: '/api/admin'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 
